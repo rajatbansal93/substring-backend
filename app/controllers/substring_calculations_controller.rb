@@ -6,7 +6,7 @@ class SubstringCalculationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @user.substring_calculations
+    render json: { calculations: @user.substring_calculations }, status: :ok
   end
 
   def create
@@ -22,7 +22,7 @@ class SubstringCalculationsController < ApplicationController
     substr_cal = @user.substring_calculations.find(params[:id])
 
     if substr_cal.destroy
-      render json: substr_cal, status: :ok
+      render json: { calculations: @user.substring_calculations }, status: :ok
     else
       render json: substr_cal.errors.full_messages,
              status: :unprocessable_entity
